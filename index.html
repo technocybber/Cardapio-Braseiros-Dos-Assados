@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <title>BRASEIROS DOS ASSADOS - Buffet & Eventos</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script id="CARDAPIO_DATA_STORE" type="application/json">{"tipoCardapio":"evento","store":{"name":"BRASEIROS DOS ASSADOS","whatsapp":"11986756309","instagram":"BRASEIROSDOSASSADOS","deliveryFee":50,"deliveryKmBase":10,"deliveryExtraKmRate":3.5,"pickupAddress":"R. Antônio João dos Santos, 69 - Jardim Vila Carrao, São Paulo - SP","openingHours":"24 Horas","salesModuleUnlocked":true,"stockModuleUnlocked":true,"expirationDate":"","logo":"https://i.pinimg.com/736x/65/bf/3e/65bf3eaa2081253aa0a1d0e57358e2b6.jpg","banner":"https://i.pinimg.com/736x/b1/d3/51/b1d35105490080bcb045943c45bbe2a5.jpg","developerName":"https://technocybber.vercel.app/","developerUrl":"https://technocybber.vercel.app/","deliveryTime":"35 - 50 min","adminPasswordToken":"MTIzNA=="},"items":[{"id":"ev-1","name":"Pacote Tradicional BBQ","price":85,"category":"pacotes","description":"Picanha, Alcatra, Fraldinha, Linguiça artesanal, Farofa na manteiga...","image":"https://images.unsplash.com/photo-1544025162-d76694265947?w=600","stock":50},{"id":"ev-2","name":"Pacote Prime BBQ","price":120,"category":"pacotes","description":"Bife de Ancho Angus, Picanha Nobre, Costela no bafo, Batatas rústica...","image":"https://images.unsplash.com/photo-1558030006-450675393462?w=600","stock":30},{"id":"ev-3","name":"Espetos Artesanais na Brasa","price":12,"category":"carnes","description":"Espetos bovinos, kafta com hortelã, frango e queijo coalho.","image":"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600","stock":200}]}</script>
+  <style>
+    body { font-family: system-ui, sans-serif; -webkit-font-smoothing: antialiased; background-color: #120f0e; color: #f5f5f4; }
+    #category-tabs::-webkit-scrollbar, .no-scrollbar::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+    #category-tabs, .no-scrollbar { -ms-overflow-style: none !important; scrollbar-width: none !important; }
+    .insta-badge { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; font-size: 11px; padding: 4px 12px; border-radius: 9999px; text-decoration: none; color: #fb7185; background-color: rgba(244, 63, 94, 0.12); border: 1px solid rgba(244, 63, 94, 0.3); }
+    .app-footer { padding: 24px 16px; text-align: center; border-top: 1px solid #3c2f29; margin-top: 24px; }
+
+    #open-status-badge .os-dot { display: inline-block; width: 8px; height: 8px; border-radius: 9999px; background-color: #22c55e; }
+    #open-status-badge .os-txt { color: #4ade80; font-weight: 900; }
+    #open-status-badge.is-closed .os-dot { background-color: #ef4444; }
+    #open-status-badge.is-closed .os-txt { color: #f87171; }
+
+    @media (prefers-color-scheme: light) {
+      #open-status-badge .os-txt { color: #15803d !important; }
+      #open-status-badge.is-closed .os-txt { color: #b91c1c !important; }
+      body { background-color: #fdfaf7 !important; color: #292524 !important; }
+      #main-app { background-color: #fdfaf7 !important; border-color: #e7e5e4 !important; }
+      .bg-\[\#1c1613\] { background-color: #ffffff !important; border-color: #e7e5e4 !important; }
+      .bg-\[\#1c1613\]\/95 { background-color: rgba(255, 255, 255, 0.95) !important; border-color: #e7e5e4 !important; }
+      .bg-\[\#120f0e\] { background-color: #fdfaf7 !important; border-color: #e7e5e4 !important; color: #292524 !important; }
+      .bg-\[\#181310\] { background-color: #f5f5f4 !important; border-color: #e7e5e4 !important; }
+      .bg-\[\#201a17\] { background-color: #f5f5f4 !important; border-color: #e7e5e4 !important; color: #292524 !important; }
+      .bg-\[\#251d19\] { background-color: #fef3c7 !important; border-color: #f59e0b !important; }
+      .bg-stone-800 { background-color: #f5f5f4 !important; }
+      .bg-stone-800:hover { background-color: #e7e5e4 !important; }
+      .bg-stone-900 { background-color: #e7e5e4 !important; }
+      .hover\:bg-stone-800\/30:hover { background-color: rgba(120, 113, 108, 0.15) !important; }
+      .divide-stone-800\/60 > :not([hidden]) ~ :not([hidden]) { border-color: #e7e5e4 !important; }
+      .border-stone-800, .border-stone-700, .border-stone-600, .border-\[\#3c2f29\] { border-color: #e7e5e4 !important; }
+      .text-stone-200 { color: #292524 !important; }
+      .text-stone-300 { color: #44403c !important; }
+      .text-stone-400 { color: #78716c !important; }
+      .text-\[\#f5f5f4\], .text-\[\#e7e5e4\], .text-\[\#d6d3d1\] { color: #292524 !important; }
+      h1.text-white, h2.text-white, h3.text-white, h4.text-white,
+      div.text-white, p.text-white, a.text-white, strong.text-white,
+      td.text-white, li.text-white, label,
+      span.text-white:not(button *) { color: #1c1917 !important; }
+      button.text-white, button .text-white { color: #ffffff !important; }
+      button.hover\:text-white:hover { color: #44403c !important; }
+      input:not([type="button"]):not([type="submit"]):not([type="reset"]),
+      select, textarea {
+        background-color: #ffffff !important;
+        color: #1c1917 !important;
+        border-color: #d6d3d1 !important;
+      }
+      input::placeholder, textarea::placeholder { color: #a8a29e !important; }
+      input:focus, select:focus, textarea:focus { border-color: #dc2626 !important; }
+      #event-quote-modal,
+      #client-login-modal,
+      #client-admin-panel-modal {
+        background-color: rgba(15, 23, 42, 0.75) !important;
+      }
+      #event-quote-modal > div,
+      #client-login-modal > div,
+      #client-admin-panel-modal > div {
+        background-color: #ffffff !important;
+        border-color: #e7e5e4 !important;
+        color: #1c1917 !important;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+      }
+      #event-quote-modal .bg-\[\#120f0e\],
+      #event-quote-modal .bg-\[\#181310\] {
+        background-color: #f5f5f4 !important;
+        border-color: #e7e5e4 !important;
+      }
+      #event-quote-modal input {
+        background-color: #ffffff !important;
+        color: #1c1917 !important;
+        border-color: #d6d3d1 !important;
+      }
+      .app-footer { border-color: #e7e5e4 !important; }
+    }
+  </style>
+</head>
+<body class="min-h-screen pb-28 select-none">
+
+  <div id="main-app" class="max-w-md mx-auto min-h-screen bg-[#120f0e] border-x border-[#3c2f29] flex flex-col relative">
+    <div class="relative w-full h-36 overflow-hidden bg-stone-900">
+      <img src="https://i.pinimg.com/736x/b1/d3/51/b1d35105490080bcb045943c45bbe2a5.jpg" class="w-full h-full object-cover">
+    </div>
+    
+    <div class="relative bg-[#1c1613] border-b border-stone-800 px-4 pb-4 pt-1 text-center flex flex-col items-center">
+      <div class="-mt-8 mb-2">
+        <img id="client-logo-img" onclick="handleLogoClickClient()" title="Toque 5 vezes para acesso proprietário" src="https://i.pinimg.com/736x/65/bf/3e/65bf3eaa2081253aa0a1d0e57358e2b6.jpg" alt="Logo" class="w-16 h-16 rounded-2xl border-2 border-amber-500 object-cover bg-white shadow-lg mx-auto cursor-pointer">
+      </div>
+      <span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#c2410c]/20 border border-[#c2410c]/40 text-amber-500 text-[10px] font-bold mb-1">
+        <i class="fa-solid fa-fire"></i> Buffet de Churrasco para Eventos
+      </span>
+      <h1 class="font-black text-white text-base tracking-wide uppercase">BRASEIROS DOS ASSADOS</h1>
+      <a href="https://instagram.com/BRASEIROSDOSASSADOS" target="_blank" class="insta-badge mt-2 text-xs font-bold">
+        <i class="fa-brands fa-instagram text-sm"></i> <span>@BRASEIROSDOSASSADOS</span>
+      </a>
+    </div>
+
+    <div class="px-4 pt-2 flex items-center justify-center">
+      <span id="open-status-badge" class="inline-flex items-center gap-1.5 text-[11px]"><span class="os-dot"></span><span class="os-txt">Aberto agora</span></span>
+    </div>
+
+    <!-- BANNER ESTABELECIMENTO FECHADO NO MOMENTO -->
+    <div id="closed-store-banner" class="hidden mx-4 mt-2 mb-1 p-3 rounded-2xl text-center shadow-lg" style="background-color:#1a080d;border:1px solid rgba(244,63,94,0.4);">
+      <div class="uppercase font-black tracking-wider" style="color:#f43f5e;font-size:12px;display:flex;align-items:center;justify-content:center;gap:6px;">
+        <span style="font-size:14px;">🚫</span> ESTABELECIMENTO FECHADO NO MOMENTO
+      </div>
+      <p style="color:#cbd5e1;font-size:11px;margin-top:4px;line-height:1.4;">
+        Horário de atendimento: <span style="color:#ffffff;font-weight:700;">24 Horas</span>
+      </p>
+    </div>
+
+    <nav id="category-tabs" class="flex gap-1 p-2.5 overflow-x-auto no-scrollbar"></nav>
+    <main id="catalog-list" class="p-3 flex-1 space-y-2.5"></main>
+
+    <div class="px-3 pb-1">
+      <section class="bg-[#201a17] border border-[#3c2f29] text-[#e7e5e4] rounded-2xl p-3.5 text-xs space-y-1.5 shadow">
+        <div class="text-[#f59e0b] font-bold flex items-center gap-1.5 text-xs">
+          <i class="fa-solid fa-truck-ramp-box"></i> <span>Logística & Deslocamento</span>
+        </div>
+        <div class="text-[11px] text-[#d6d3d1]">
+          <span class="text-[#a8a29e]">Base:</span> <strong class="text-white">R. Antônio João dos Santos, 69 - Jardim Vila Carrao, São Paulo - SP</strong>
+        </div>
+        <div class="flex justify-between pt-1.5 border-t border-stone-800 text-[11px]">
+          <span>Taxa Base: <strong class="text-white">R$ 50,00</strong></span>
+          <span>Km Excedente: <strong class="text-white">R$ 3,50/km</strong></span>
+        </div>
+      </section>
+    </div>
+
+    <footer class="app-footer">
+      <div class="text-[10px] font-bold text-stone-500">DESENVOLVIDO POR</div>
+      <a href="https://technocybber.vercel.app/" target="_blank" class="text-amber-500 text-xs font-bold underline">https://technocybber.vercel.app/</a>
+    </footer>
+
+    <div class="fixed bottom-0 left-0 right-0 max-w-md mx-auto p-3 bg-[#1c1613]/95 border-t border-stone-800 z-30 space-y-1.5">
+      <div id="event-chosen-pill" class="text-[11px] text-center font-bold text-amber-400">
+        0 pratos/serviços selecionados
+      </div>
+      <button type="button" id="event-quote-open-btn" onclick="openEventQuoteModal()" class="w-full py-3 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs flex items-center justify-center gap-2 shadow-lg cursor-pointer transition active:scale-95">
+        <i class="fa-solid fa-calendar-check text-sm"></i> Solicitar Orçamento / Agendamento
+      </button>
+    </div>
+  </div>
+
+  <div id="event-quote-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-[#1c1613] border border-stone-800 w-full max-w-md rounded-2xl p-5 space-y-3.5 shadow-2xl my-auto">
+      <div class="flex items-center justify-between pb-2 border-b border-stone-800">
+        <h3 class="font-bold text-white text-sm flex items-center gap-2">
+          <i class="fa-solid fa-calendar-check text-amber-500"></i> Proposta para Buffet & Evento
+        </h3>
+        <button type="button" onclick="closeEventQuoteModal()" class="text-stone-400 font-bold hover:text-white">✕</button>
+      </div>
+
+      <div id="event-chosen-summary-box" class="bg-[#120f0e] border border-amber-500/30 p-2.5 rounded-xl space-y-1.5 text-[11px] max-h-36 overflow-y-auto"></div>
+
+      <div class="space-y-2.5">
+        <div>
+          <label class="block text-[11px] font-bold text-stone-300 mb-1">Seu Nome *</label>
+          <input id="ev-quote-name" type="text" placeholder="Nome completo" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white text-xs outline-none focus:border-amber-500">
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-stone-300 mb-1">WhatsApp com DDD *</label>
+          <input id="ev-quote-phone" type="tel" placeholder="(11) 99999-9999" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white text-xs outline-none focus:border-amber-500">
+        </div>
+        <div class="grid grid-cols-2 gap-2">
+          <div>
+            <label class="block text-[11px] font-bold text-stone-300 mb-1">Data do Evento *</label>
+            <input id="ev-quote-date" type="date" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white text-xs outline-none focus:border-amber-500">
+          </div>
+          <div>
+            <label class="block text-[11px] font-bold text-stone-300 mb-1">Horário (hs) *</label>
+            <input id="ev-quote-time" type="time" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white text-xs outline-none focus:border-amber-500">
+          </div>
+        </div>
+        <div>
+          <label class="block text-[11px] font-bold text-stone-300 mb-1">Nº Estimado de Convidados *</label>
+          <input id="ev-quote-guests" type="number" min="1" placeholder="Ex: 50 pessoas" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white text-xs outline-none focus:border-amber-500">
+        </div>
+        
+        <div class="space-y-1 bg-[#181310] p-2.5 rounded-xl border border-stone-800">
+          <label class="block text-[11px] font-bold text-stone-300 mb-1">Local / Cidade do Evento *</label>
+          <div class="flex items-center gap-2 mb-1.5">
+            <input id="ev-quote-cep" type="text" maxlength="9" placeholder="CEP (00000-000)" class="w-32 bg-[#120f0e] border border-stone-700 px-2.5 py-1.5 rounded-lg text-white text-xs outline-none font-mono focus:border-amber-500">
+            <span id="ev-cep-status" class="text-[10px] text-amber-400 font-semibold truncate"></span>
+          </div>
+          <input id="ev-quote-location" type="text" placeholder="Endereço, chácara ou cidade..." class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white text-xs outline-none focus:border-amber-500">
+        </div>
+      </div>
+
+      <div class="pt-2 border-t border-stone-800">
+        <button type="button" onclick="submitEventQuoteWhatsapp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg transition active:scale-95 cursor-pointer">
+          <i class="fa-brands fa-whatsapp text-sm"></i> Enviar Proposta no WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL LOGIN ADMIN DO PROPRIETÁRIO -->
+  <div id="client-login-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-[#1c1613] border border-stone-700 w-full max-w-xs rounded-2xl p-5 space-y-4 shadow-2xl text-center">
+      <div class="w-12 h-12 rounded-xl bg-amber-950/60 border border-amber-500/40 text-amber-400 mx-auto flex items-center justify-center text-xl">🔒</div>
+      <div>
+        <h3 class="text-sm font-black text-white">Acesso do Proprietário</h3>
+        <p class="text-[11px] text-stone-400 mt-0.5">Digite a senha de administrador</p>
+      </div>
+      <form onsubmit="handleClientAdminLogin(event)" class="space-y-3">
+        <input id="client-admin-pass-input" type="password" required placeholder="••••••••" class="w-full bg-[#120f0e] border border-stone-700 text-white px-3 py-2 text-center text-sm rounded-xl outline-none focus:border-amber-500 tracking-widest">
+        <div class="flex gap-2">
+          <button type="button" onclick="closeClientLoginModal()" class="flex-1 py-2 text-xs font-bold text-stone-400 bg-stone-800 rounded-xl hover:text-white">Cancelar</button>
+          <button type="submit" class="flex-1 py-2 text-xs font-black bg-amber-600 hover:bg-amber-500 text-white rounded-xl shadow">Entrar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- PAINEL DO PROPRIETÁRIO (BUFFET) -->
+  <div id="client-admin-panel-modal" class="hidden fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col p-3 md:p-6 overflow-hidden">
+    <div class="bg-[#1c1613] border border-stone-800 w-full max-w-4xl mx-auto rounded-3xl shadow-2xl flex flex-col flex-1 max-h-[92vh] overflow-hidden">
+      <div class="p-4 bg-[#120f0e] border-b border-stone-800 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-amber-600/20 border border-amber-500/30 flex items-center justify-center text-lg">🛡️</div>
+          <div>
+            <h2 class="text-sm md:text-base font-black text-white uppercase">PAINEL DO PROPRIETÁRIO - BUFFET</h2>
+            <div class="flex items-center gap-2 text-[11px] text-stone-400">
+              <span class="text-emerald-400 font-bold">● Acesso Autenticado</span>
+              <span>|</span>
+              <span class="font-semibold text-stone-300">BRASEIROS DOS ASSADOS</span>
+            </div>
+          </div>
+        </div>
+        <button type="button" onclick="closeClientAdminPanel()" class="px-3.5 py-1.5 bg-stone-800 hover:bg-stone-700 text-stone-200 text-xs font-bold rounded-xl transition">
+          ✕ Fechar Painel
+        </button>
+      </div>
+
+      <div class="flex gap-2 p-3 bg-[#181310] border-b border-stone-800 overflow-x-auto no-scrollbar">
+        <button type="button" id="tab-ev-btn-menu-edit" onclick="switchOwnerTab('menu-edit')" class="px-3.5 py-2 rounded-xl text-xs font-black bg-[#c2410c] text-white shadow">
+          🍴 Editar Cardápio
+        </button>
+        <button type="button" id="tab-ev-btn-stock" onclick="switchOwnerTab('stock')" class="px-3.5 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-white">
+          📦 Controle de Estoque
+        </button>
+        <button type="button" id="tab-ev-btn-sales" onclick="switchOwnerTab('sales')" class="px-3.5 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-white">
+          📊 Controle de Vendas
+        </button>
+        <button type="button" id="tab-ev-btn-config" onclick="switchOwnerTab('config')" class="px-3.5 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-white">
+          ⚙️ Configurações
+        </button>
+      </div>
+
+      <div class="p-4 overflow-y-auto flex-1 space-y-4">
+        
+        <div id="tab-ev-pane-menu-edit" class="space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 bg-[#120f0e] border border-amber-500/20 rounded-2xl">
+            <div>
+              <h3 class="text-xs font-bold text-white flex items-center gap-1.5">
+                <span class="text-amber-500">✏️</span> Altere nomes e preços dos pratos livremente:
+              </h3>
+              <p class="text-[11px] text-stone-400">Edite os campos abaixo e clique em Salvar Alterações para aplicar no cardápio.</p>
+            </div>
+            <button type="button" onclick="saveOwnerMenuChanges()" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-xl shadow cursor-pointer whitespace-nowrap flex items-center gap-1.5">
+              💾 Salvar Alterações do Cardápio
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <div id="owner-ev-menu-edit-container"></div>
+          </div>
+        </div>
+
+        <div id="tab-ev-pane-stock" class="hidden space-y-4">
+          <div id="owner-ev-stock-locked" class="hidden p-6 bg-[#120f0e] border border-amber-500/30 rounded-2xl text-center space-y-2">
+            <span class="text-2xl">🔒</span>
+            <h3 class="text-sm font-bold text-white">Módulo de Estoque Bloqueado</h3>
+            <p class="text-xs text-stone-400">Este módulo foi bloqueado pelo administrador.</p>
+          </div>
+          <div id="owner-ev-stock-content" class="space-y-4">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-stone-400">Ajuste as quantidades em estoque dos pratos:</span>
+              <button type="button" onclick="saveOwnerMenuChanges()" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-black rounded-xl shadow cursor-pointer">
+                💾 Salvar Estoque
+              </button>
+            </div>
+            <div class="overflow-x-auto">
+              <div id="owner-ev-table-container"></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="tab-ev-pane-sales" class="hidden space-y-4">
+          <div id="owner-ev-sales-locked" class="hidden p-6 bg-[#120f0e] border border-amber-500/30 rounded-2xl text-center space-y-2">
+            <span class="text-2xl">🔒</span>
+            <h3 class="text-sm font-bold text-white">Módulo de Vendas Bloqueado</h3>
+            <p class="text-xs text-stone-400">Este módulo foi bloqueado pelo administrador.</p>
+          </div>
+          <div id="owner-ev-sales-content" class="space-y-4">
+            <div class="flex items-center justify-between">
+              <div>
+                <span class="text-xs font-bold text-stone-400">Propostas Registradas & Faturamento Estimado:</span>
+                <div id="owner-ev-total-sales-badge" class="text-base font-black text-amber-500">R$ 0,00</div>
+              </div>
+              <button type="button" onclick="clearOwnerHistory()" class="px-3 py-1.5 bg-rose-950/40 border border-rose-500/30 text-rose-400 hover:text-white text-xs font-bold rounded-xl">
+                🗑️ Limpar Histórico
+              </button>
+            </div>
+            <div id="owner-ev-quotes-container" class="space-y-2"></div>
+          </div>
+        </div>
+
+        <div id="tab-ev-pane-config" class="hidden space-y-4">
+          <form onsubmit="saveOwnerStoreConfig(event)" class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div>
+              <label class="block font-bold text-stone-400 mb-1">Nome do Buffet</label>
+              <input id="owner-cfg-name" type="text" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white outline-none">
+            </div>
+            <div>
+              <label class="block font-bold text-stone-400 mb-1">WhatsApp de Contato</label>
+              <input id="owner-cfg-whatsapp" type="text" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white outline-none">
+            </div>
+            <div>
+              <label class="block font-bold text-stone-400 mb-1">Taxa Base (R$)</label>
+              <input id="owner-cfg-fee" type="number" step="0.5" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white outline-none">
+            </div>
+            <div>
+              <label class="block font-bold text-stone-400 mb-1">Km Excedente (R$/km)</label>
+              <input id="owner-cfg-km-rate" type="number" step="0.5" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white outline-none">
+            </div>
+            <div class="sm:col-span-2">
+              <label class="block font-bold text-stone-400 mb-1">Endereço Base</label>
+              <input id="owner-cfg-address" type="text" class="w-full bg-[#120f0e] border border-stone-700 p-2.5 rounded-xl text-white outline-none">
+            </div>
+            <div class="sm:col-span-2 flex justify-end pt-2">
+              <button type="submit" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-xl">
+                💾 Salvar Configurações
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let store = {"name":"BRASEIROS DOS ASSADOS","whatsapp":"11986756309","instagram":"BRASEIROSDOSASSADOS","deliveryFee":50,"deliveryKmBase":10,"deliveryExtraKmRate":3.5,"pickupAddress":"R. Antônio João dos Santos, 69 - Jardim Vila Carrao, São Paulo - SP","openingHours":"24 Horas","salesModuleUnlocked":true,"stockModuleUnlocked":true,"expirationDate":"","logo":"https://i.pinimg.com/736x/65/bf/3e/65bf3eaa2081253aa0a1d0e57358e2b6.jpg","banner":"https://i.pinimg.com/736x/b1/d3/51/b1d35105490080bcb045943c45bbe2a5.jpg","developerName":"https://technocybber.vercel.app/","developerUrl":"https://technocybber.vercel.app/","deliveryTime":"35 - 50 min","adminPasswordToken":"MTIzNA=="};
+    let items = [{"id":"ev-1","name":"Pacote Tradicional BBQ","price":85,"category":"pacotes","description":"Picanha, Alcatra, Fraldinha, Linguiça artesanal, Farofa na manteiga...","image":"https://images.unsplash.com/photo-1544025162-d76694265947?w=600","stock":50},{"id":"ev-2","name":"Pacote Prime BBQ","price":120,"category":"pacotes","description":"Bife de Ancho Angus, Picanha Nobre, Costela no bafo, Batatas rústica...","image":"https://images.unsplash.com/photo-1558030006-450675393462?w=600","stock":30},{"id":"ev-3","name":"Espetos Artesanais na Brasa","price":12,"category":"carnes","description":"Espetos bovinos, kafta com hortelã, frango e queijo coalho.","image":"https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=600","stock":200}];
+    const OH_SCHEDULE = {"0":[{"start":0,"end":1440}],"1":[{"start":0,"end":1440}],"2":[{"start":0,"end":1440}],"3":[{"start":0,"end":1440}],"4":[{"start":0,"end":1440}],"5":[{"start":0,"end":1440}],"6":[{"start":0,"end":1440}]};
+    let selectedCategory = 'all';
+    let chosenEventItems = {};
+    let clientClicks = 0;
+
+    const savedCustom = localStorage.getItem('BUFFET_CUSTOM_' + (store.name || 'STORE'));
+    if (savedCustom) {
+      try {
+        const parsed = JSON.parse(savedCustom);
+        if (parsed.items) items = parsed.items;
+        if (parsed.store) store = Object.assign({}, store, parsed.store);
+      } catch(e){}
+    }
+
+    function checkExpiration() {
+      if (store.expirationDate) {
+        const today = new Date().toISOString().split('T')[0];
+        if (today > store.expirationDate) {
+          document.body.innerHTML = `
+            <div class="min-h-screen flex flex-col items-center justify-center p-6 text-center bg-[#120f0e] text-[#f5f5f4]">
+              <div class="w-16 h-16 rounded-2xl bg-amber-950/60 border border-amber-500/40 text-amber-400 flex items-center justify-center text-3xl mb-4">⏳</div>
+              <h1 class="text-xl font-black mb-2 uppercase">Proposta / Cardápio Expirado</h1>
+              <p class="text-sm text-stone-400 max-w-sm mb-6">O período de validade desta proposta expirou. Entre em contato para renovar as datas.</p>
+              <a href="https://wa.me/${(store.whatsapp||'').replace(/\D/g,'')}" target="_blank" class="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-xl text-sm shadow-lg">Falar no WhatsApp</a>
+            </div>
+          `;
+          return true;
+        }
+      }
+      return false;
+    }
+
+    function getClientToday() {
+      const now = new Date();
+      const y = now.getFullYear();
+      const m = String(now.getMonth() + 1).padStart(2, '0');
+      const d = String(now.getDate()).padStart(2, '0');
+      return y + '-' + m + '-' + d;
+    }
+
+    function attachClientDateBlock() {
+      const el = document.getElementById('ev-quote-date');
+      if (!el || el.dataset.blocked) return;
+      el.dataset.blocked = 'true';
+
+      const validate = () => {
+        const today = getClientToday();
+        el.min = today;
+        if (el.value && el.value < today) {
+          alert('Data inválida! Não é permitido digitar ou selecionar datas passadas.');
+          el.value = '';
+          el.focus();
+        }
+      };
+
+      el.addEventListener('input', validate);
+      el.addEventListener('change', validate);
+      el.addEventListener('blur', validate);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') validate();
+      });
+    }
+
+    function setupClientCep() {
+      const cepEl = document.getElementById('ev-quote-cep');
+      const locEl = document.getElementById('ev-quote-location');
+      const statusEl = document.getElementById('ev-cep-status');
+      if (!cepEl || !locEl || cepEl.dataset.cepAttached) return;
+      cepEl.dataset.cepAttached = 'true';
+
+      const searchCep = async (val) => {
+        const clean = val.replace(/\D/g, '');
+        if (clean.length === 8) {
+          if (statusEl) { statusEl.textContent = '🔍 Buscando CEP...'; statusEl.className = 'text-[10px] text-amber-400 font-semibold'; }
+          try {
+            const res = await fetch('https://viacep.com.br/ws/' + clean + '/json/');
+            const d = await res.json();
+            if (d && !d.erro) {
+              const p = [];
+              if (d.logradouro) p.push(d.logradouro);
+              if (d.bairro) p.push(d.bairro);
+              if (d.localidade) p.push(d.localidade + ' - ' + d.uf);
+              locEl.value = p.join(', ') + ' - Nº ';
+              locEl.focus();
+              if (statusEl) { statusEl.textContent = '✓ Endereço preenchido!'; statusEl.className = 'text-[10px] text-emerald-400 font-bold'; }
+            } else {
+              if (statusEl) { statusEl.textContent = '⚠️ CEP não encontrado'; statusEl.className = 'text-[10px] text-rose-400 font-semibold'; }
+            }
+          } catch(e) {
+            if (statusEl) statusEl.textContent = 'Erro ao buscar CEP';
+          }
+        }
+      };
+
+      cepEl.addEventListener('input', (e) => {
+        let v = e.target.value.replace(/\D/g, '').slice(0, 8);
+        if (v.length > 5) v = v.replace(/^(\d{5})(\d)/, '$1-$2');
+        e.target.value = v;
+        searchCep(v);
+      });
+    }
+
+    function toggleChoice(id) {
+      if (chosenEventItems[id]) {
+        delete chosenEventItems[id];
+      } else {
+        chosenEventItems[id] = true;
+      }
+      renderCatalog();
+      updateChosenPill();
+    }
+
+    function updateChosenPill() {
+      const c = Object.keys(chosenEventItems).length;
+      document.getElementById('event-chosen-pill').textContent = c === 1 ? '1 prato/serviço selecionado' : (c + ' pratos/serviços selecionados');
+    }
+
+    function renderCatalog() {
+      const listContainer = document.getElementById('catalog-list');
+      const filtered = items.filter(x => selectedCategory === 'all' || x.category === selectedCategory);
+      listContainer.innerHTML = filtered.map(it => {
+        const isChosen = !!chosenEventItems[it.id];
+        return `
+          <div class="rounded-xl ${isChosen ? 'bg-[#251d19] border-amber-500 shadow-md' : 'bg-[#1c1613] border-stone-800'} border p-2.5 flex gap-2.5 items-center transition-all">
+            <img src="${it.image}" class="w-14 h-14 rounded-lg object-cover bg-stone-900 shrink-0">
+            <div class="flex-1 min-w-0">
+              <h4 class="font-bold text-white text-xs truncate">${it.name}</h4>
+              <p class="text-[10px] text-stone-400 line-clamp-1 mt-0.5">${it.description || ''}</p>
+              <div class="flex items-center justify-between mt-1">
+                <span class="text-amber-500 font-black text-xs">R$ ${Number(it.price).toFixed(2).replace('.', ',')}</span>
+                <button type="button" onclick="toggleChoice('${it.id}')" class="px-2.5 py-1 rounded-lg text-[10px] font-black cursor-pointer transition ${isChosen ? 'bg-amber-600 text-white shadow' : 'border border-stone-600 text-stone-300 hover:border-amber-500'}">
+                  ${isChosen ? '✓ Escolhido' : '+ Escolher'}
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function renderCategories() {
+      const catBox = document.getElementById('category-tabs');
+      const cats = [{ id: 'all', label: 'Todos' }, { id: 'pacotes', label: '🔥 Pacotes' }, { id: 'carnes', label: '🥩 Carnes' }, { id: 'acompanhamentos', label: '🥗 Guarnições' }, { id: 'bebidas', label: '🍻 Bebidas' }];
+      catBox.innerHTML = cats.map(c => `
+        <button onclick="selectedCategory='${c.id}'; renderCategories(); renderCatalog();" class="px-2 py-1 rounded-lg font-bold whitespace-nowrap text-[10px] ${selectedCategory === c.id ? 'bg-[#c2410c] text-white shadow' : 'bg-[#1c1613] text-stone-400'}">${c.label}</button>
+      `).join('');
+    }
+
+    function openEventQuoteModal() {
+      if (orderBlockedGuard()) return;
+      attachClientDateBlock();
+      setupClientCep();
+      const dInput = document.getElementById('ev-quote-date');
+      if (dInput) {
+        const today = getClientToday();
+        dInput.min = today;
+        if (dInput.value && dInput.value < today) {
+          dInput.value = '';
+        }
+      }
+
+      const chosenIds = Object.keys(chosenEventItems);
+      const box = document.getElementById('event-chosen-summary-box');
+      if (chosenIds.length === 0) {
+        box.innerHTML = `<span class="text-stone-400 italic">Nenhum prato/serviço selecionado previamente. (Você pode escolher no cardápio ou especificar abaixo).</span>`;
+      } else {
+        let totalVal = 0;
+        const listItems = chosenIds.map(id => {
+          const item = items.find(x => String(x.id) === String(id));
+          if (item) {
+            totalVal += Number(item.price || 0);
+            return `<li class="text-white">• ${item.name} <span class="text-amber-500 font-bold">(R$ ${Number(item.price).toFixed(2).replace('.', ',')})</span></li>`;
+          }
+          return '';
+        }).join('');
+
+        box.innerHTML = `
+          <strong class="text-amber-400 block mb-1">Pratos / Serviços Selecionados:</strong>
+          <ul class="space-y-0.5">
+            ${listItems}
+          </ul>
+          <div class="pt-2 mt-2 border-t border-stone-800 flex items-center justify-between text-xs">
+            <span class="text-stone-300 font-bold">Total dos Pratos:</span>
+            <span class="text-emerald-400 font-black text-sm">R$ ${totalVal.toFixed(2).replace('.', ',')}</span>
+          </div>
+        `;
+      }
+      document.getElementById('event-quote-modal').classList.remove('hidden');
+    }
+
+    function closeEventQuoteModal() { document.getElementById('event-quote-modal').classList.add('hidden'); }
+
+    function submitEventQuoteWhatsapp() {
+      if (orderBlockedGuard()) return;
+      const name = (document.getElementById('ev-quote-name')?.value || '').trim();
+      const phone = (document.getElementById('ev-quote-phone')?.value || '').trim();
+      const date = document.getElementById('ev-quote-date')?.value;
+      const time = document.getElementById('ev-quote-time')?.value;
+      const guests = document.getElementById('ev-quote-guests')?.value;
+      const cep = (document.getElementById('ev-quote-cep')?.value || '').trim();
+      const location = (document.getElementById('ev-quote-location')?.value || '').trim();
+
+      if (!name || !phone || !date) { alert('Preencha os campos obrigatórios (*).'); return; }
+      
+      const today = getClientToday();
+      if (date < today) {
+        alert('Data inválida! Não é permitido agendar em datas passadas.');
+        return;
+      }
+
+      const [y, m, d] = date.split('-');
+      let text = `*PROPOSTA / AGENDAMENTO - ${store.name}*\n\n`;
+      text += `*Cliente:* ${name}\n`;
+      text += `*WhatsApp:* ${phone}\n`;
+      text += `*Data do Evento:* ${d}/${m}/${y}\n`;
+      if (time) text += `*Horário:* ${time}\n`;
+      if (guests) text += `*Nº de Convidados:* ${guests}\n`;
+      if (location) text += `*Local/Cidade:* ${location}${cep ? ` (CEP: ${cep})` : ''}\n`;
+
+      const chosenIds = Object.keys(chosenEventItems);
+      let totalVal = 0;
+      if (chosenIds.length > 0) {
+        text += `\n*Pratos e Serviços Escolhidos:*\n`;
+        chosenIds.forEach(id => {
+          const item = items.find(x => String(x.id) === String(id));
+          if (item) {
+            totalVal += Number(item.price || 0);
+            text += `• ${item.name} - R$ ${Number(item.price).toFixed(2).replace('.', ',')}\n`;
+          }
+        });
+        text += `\n*Total dos Pratos:* R$ ${totalVal.toFixed(2).replace('.', ',')}\n`;
+      }
+
+      const quotesList = JSON.parse(localStorage.getItem('BUFFET_QUOTES_' + (store.name || 'STORE')) || '[]');
+      const now = new Date();
+      quotesList.unshift({
+        id: String(Date.now()),
+        name: name,
+        phone: phone,
+        date: `${d}/${m}/${y}`,
+        guests: guests,
+        location: location,
+        totalVal: totalVal,
+        timestamp: `${now.toLocaleDateString('pt-BR')} ${now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}`
+      });
+      localStorage.setItem('BUFFET_QUOTES_' + (store.name || 'STORE'), JSON.stringify(quotesList));
+
+      window.open('https://wa.me/' + (store.whatsapp || '').replace(/\D/g, '') + '?text=' + encodeURIComponent(text), '_blank');
+      closeEventQuoteModal();
+    }
+
+    function handleLogoClickClient() {
+      clientClicks++;
+      setTimeout(() => { clientClicks = 0; }, 1500);
+      if (clientClicks >= 5) {
+        clientClicks = 0;
+        document.getElementById('client-admin-pass-input').value = '';
+        document.getElementById('client-login-modal').classList.remove('hidden');
+      }
+    }
+
+    function closeClientLoginModal() { document.getElementById('client-login-modal').classList.add('hidden'); }
+
+    function handleClientAdminLogin(e) {
+      e.preventDefault();
+      const pass = document.getElementById('client-admin-pass-input').value.trim();
+      const expected = store.adminPasswordToken || btoa('1234');
+      const pToken = btoa(unescape(encodeURIComponent(pass)));
+      if (pToken === expected || pass === '1234') {
+        closeClientLoginModal();
+        openClientAdminPanel();
+      } else {
+        alert('Senha incorreta! Digite a senha de administrador.');
+      }
+    }
+
+    function openClientAdminPanel() {
+      renderOwnerMenuEditorTable();
+      renderOwnerStockTable();
+      renderOwnerQuotesList();
+      populateOwnerStoreConfig();
+
+      const isStockUnlocked = store.stockModuleUnlocked !== false;
+      document.getElementById('owner-ev-stock-locked').classList.toggle('hidden', isStockUnlocked);
+      document.getElementById('owner-ev-stock-content').classList.toggle('hidden', !isStockUnlocked);
+
+      const isSalesUnlocked = store.salesModuleUnlocked !== false;
+      document.getElementById('owner-ev-sales-locked').classList.toggle('hidden', isSalesUnlocked);
+      document.getElementById('owner-ev-sales-content').classList.toggle('hidden', !isSalesUnlocked);
+
+      switchOwnerTab('menu-edit');
+      document.getElementById('client-admin-panel-modal').classList.remove('hidden');
+    }
+
+    function closeClientAdminPanel() {
+      document.getElementById('client-admin-panel-modal').classList.add('hidden');
+    }
+
+    function switchOwnerTab(tab) {
+      ['menu-edit', 'stock', 'sales', 'config'].forEach(t => {
+        const pane = document.getElementById('tab-ev-pane-' + t);
+        if (pane) pane.classList.toggle('hidden', t !== tab);
+        const btn = document.getElementById('tab-ev-btn-' + t);
+        if (btn) {
+          btn.className = t === tab
+            ? 'px-3.5 py-2 rounded-xl text-xs font-black bg-[#c2410c] text-white shadow'
+            : 'px-3.5 py-2 rounded-xl text-xs font-bold text-stone-400 hover:text-white';
+        }
+      });
+    }
+
+    function renderOwnerMenuEditorTable() {
+      const container = document.getElementById('owner-ev-menu-edit-container');
+      container.innerHTML = `
+        <table class="w-full text-left text-xs min-w-[500px] border-collapse bg-[#120f0e] rounded-xl overflow-hidden border border-stone-800">
+          <thead class="bg-[#181310] text-stone-400 border-b border-stone-800 uppercase text-[10px] font-black">
+            <tr>
+              <th class="p-3">Nome do Prato / Serviço</th>
+              <th class="p-3 w-40">Preço de Venda (R$)</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-800/60">
+            ${items.map((it, idx) => `
+              <tr class="hover:bg-stone-800/30">
+                <td class="p-2.5">
+                  <div class="flex items-center gap-2.5">
+                    <img src="${it.image}" class="w-10 h-10 rounded-lg object-cover bg-stone-900 shrink-0 border border-stone-700">
+                    <input id="owner-it-name-${idx}" type="text" value="${it.name}" class="w-full bg-[#181310] border border-stone-700 focus:border-amber-500 px-3 py-2 rounded-lg text-white font-bold text-xs outline-none">
+                  </div>
+                </td>
+                <td class="p-2.5">
+                  <div class="relative">
+                    <span class="absolute left-2.5 top-2 text-stone-400 text-xs font-bold">R$</span>
+                    <input id="owner-it-price-${idx}" type="number" step="0.5" value="${Number(it.price).toFixed(2)}" class="w-full bg-[#181310] border border-stone-700 focus:border-amber-500 pl-8 pr-2.5 py-2 rounded-lg text-amber-500 font-black text-xs text-right outline-none">
+                  </div>
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function renderOwnerStockTable() {
+      const container = document.getElementById('owner-ev-table-container');
+      container.innerHTML = `
+        <table class="w-full text-left text-xs min-w-[500px] border-collapse bg-[#120f0e] rounded-xl overflow-hidden border border-stone-800">
+          <thead class="bg-[#181310] text-stone-400 border-b border-stone-800 uppercase text-[10px] font-black">
+            <tr>
+              <th class="p-3">Item</th>
+              <th class="p-3 w-32 text-center">Estoque Atual</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-stone-800/60">
+            ${items.map((it, idx) => `
+              <tr>
+                <td class="p-2.5 font-bold text-white flex items-center gap-2">
+                  <img src="${it.image}" class="w-8 h-8 rounded-lg object-cover bg-stone-900 shrink-0">
+                  <span>${it.name}</span>
+                </td>
+                <td class="p-2.5 text-center">
+                  <input id="owner-it-stock-${idx}" type="number" value="${it.stock || 100}" class="w-24 mx-auto bg-[#181310] border border-stone-700 px-2 py-1.5 rounded-lg text-white font-bold text-xs text-center outline-none">
+                </td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      `;
+    }
+
+    function saveOwnerMenuChanges() {
+      items.forEach((it, idx) => {
+        const nameEl = document.getElementById('owner-it-name-' + idx);
+        const priceEl = document.getElementById('owner-it-price-' + idx);
+        const stockEl = document.getElementById('owner-it-stock-' + idx);
+        if (nameEl) it.name = nameEl.value.trim();
+        if (priceEl) it.price = parseFloat(priceEl.value) || 0;
+        if (stockEl) it.stock = parseInt(stockEl.value, 10) || 0;
+      });
+
+      localStorage.setItem('BUFFET_CUSTOM_' + (store.name || 'STORE'), JSON.stringify({ items, store }));
+      renderCatalog();
+      renderOwnerMenuEditorTable();
+      renderOwnerStockTable();
+      alert('✅ Cardápio atualizado! Nomes e preços foram salvos com sucesso.');
+    }
+
+    function renderOwnerQuotesList() {
+      const container = document.getElementById('owner-ev-quotes-container');
+      const list = JSON.parse(localStorage.getItem('BUFFET_QUOTES_' + (store.name || 'STORE')) || '[]');
+      let sum = 0;
+      list.forEach(q => sum += Number(q.totalVal || 0));
+      document.getElementById('owner-ev-total-sales-badge').textContent = 'R$ ' + sum.toFixed(2).replace('.', ',');
+
+      if (list.length === 0) {
+        container.innerHTML = '<div class="text-center py-6 text-stone-500 text-xs">Nenhum agendamento registrado ainda.</div>';
+        return;
+      }
+      container.innerHTML = list.map(q => `
+        <div class="bg-[#120f0e] border border-stone-800 p-3 rounded-xl flex justify-between items-center text-xs">
+          <div>
+            <h4 class="font-bold text-white">${q.name} <span class="text-stone-400 font-normal">(${q.phone})</span></h4>
+            <div class="text-[11px] text-stone-400 mt-0.5">
+              <span>📅 Data: ${q.date}</span> | <span>👥 Convidados: ${q.guests || '-'}</span> | <span>📍 ${q.location || '-'}</span>
+            </div>
+            ${q.totalVal ? `<span class="text-amber-500 font-bold text-[11px]">Total Pratos: R$ ${Number(q.totalVal).toFixed(2).replace('.', ',')}</span>` : ''}
+          </div>
+          <span class="text-[10px] text-stone-500 font-mono">${q.timestamp}</span>
+        </div>
+      `).join('');
+    }
+
+    function clearOwnerHistory() {
+      if (!confirm('Deseja limpar todo o histórico de vendas/propostas?')) return;
+      localStorage.removeItem('BUFFET_QUOTES_' + (store.name || 'STORE'));
+      renderOwnerQuotesList();
+    }
+
+    function populateOwnerStoreConfig() {
+      document.getElementById('owner-cfg-name').value = store.name || '';
+      document.getElementById('owner-cfg-whatsapp').value = store.whatsapp || '';
+      document.getElementById('owner-cfg-fee').value = store.deliveryFee ?? 50;
+      document.getElementById('owner-cfg-km-rate').value = store.deliveryExtraKmRate ?? 3.5;
+      document.getElementById('owner-cfg-address').value = store.pickupAddress || '';
+    }
+
+    function saveOwnerStoreConfig(e) {
+      e.preventDefault();
+      store.name = document.getElementById('owner-cfg-name').value.trim() || store.name;
+      store.whatsapp = document.getElementById('owner-cfg-whatsapp').value.trim() || store.whatsapp;
+      store.deliveryFee = parseFloat(document.getElementById('owner-cfg-fee').value) || 0;
+      store.deliveryExtraKmRate = parseFloat(document.getElementById('owner-cfg-km-rate').value) || 0;
+      store.pickupAddress = document.getElementById('owner-cfg-address').value.trim() || store.pickupAddress;
+
+      localStorage.setItem('BUFFET_CUSTOM_' + (store.name || 'STORE'), JSON.stringify({ items, store }));
+      alert('✅ Dados salvos com sucesso!');
+      location.reload();
+    }
+
+    function isStoreOpenNow() {
+      const hasAny = [0,1,2,3,4,5,6].some(d => (OH_SCHEDULE[d] || []).length > 0);
+      if (!hasAny) return true;
+      const now = new Date();
+      const today = now.getDay();
+      const yest = (today + 6) % 7;
+      const mins = now.getHours() * 60 + now.getMinutes();
+      const hit = list => (list || []).some(r => (mins >= r.start && mins < r.end) || (mins + 1440 >= r.start && mins + 1440 < r.end));
+      return hit(OH_SCHEDULE[today]) || hit(OH_SCHEDULE[yest]);
+    }
+
+    function updateOpenStatus() {
+      const open = isStoreOpenNow();
+      const badge = document.getElementById('open-status-badge');
+      if (badge) {
+        badge.classList.toggle('is-closed', !open);
+        const txt = badge.querySelector('.os-txt');
+        if (txt) txt.textContent = open ? 'Aberto agora' : 'Fechado agora';
+      }
+      const banner = document.getElementById('closed-store-banner');
+      if (banner) banner.classList.toggle('hidden', open);
+      applyOrderBlocking(open);
+    }
+
+    function applyOrderBlocking(open) {
+      const btn = document.getElementById('event-quote-open-btn');
+      if (btn) {
+        btn.disabled = !open;
+        btn.style.opacity = open ? '' : '0.45';
+        btn.style.pointerEvents = open ? '' : 'none';
+        btn.style.filter = open ? '' : 'grayscale(1)';
+        btn.style.cursor = open ? '' : 'not-allowed';
+        btn.title = open ? '' : 'Estabelecimento fechado no momento';
+      }
+    }
+
+    function orderBlockedGuard() {
+      if (isStoreOpenNow()) return false;
+      alert('🚫 ESTABELECIMENTO FECHADO NO MOMENTO\n\nNão estamos aceitando pedidos agora.\nHorário de funcionamento: ' + (store.openingHours || '') + '\n\nVolte no horário indicado!');
+      return true;
+    }
+
+    function init() {
+      if (checkExpiration()) return;
+      attachClientDateBlock();
+      setupClientCep();
+      renderCategories();
+      renderCatalog();
+      updateOpenStatus();
+      setInterval(updateOpenStatus, 30000);
+    }
+    init();
+  </script>
+</body>
+</html>
